@@ -1,6 +1,7 @@
 type UpdateRideStatusResponse {
     ok: Boolean!
     error: String
+    rideId: Int
 }
 
 # enum 타입 사용이 가능하다.

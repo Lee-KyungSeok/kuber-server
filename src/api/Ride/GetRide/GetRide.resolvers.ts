@@ -14,14 +14,17 @@ const resolvers: Resolvers = {
             const user: User = req.user;
 
             try {
-                // 원래는 아래와 같이 ride 를 relation 을 주어 가져와야 하지만 이는 무거운 작업이므로 가볍게 id 를 entity 에 주어 처리한다.
+                // 원래는 아래와 같이 ride 를 relation 을 주어 다른 테이블을 가져올 수 있다..
                 // const ride = await Ride.findOne({
                 //     id: args.rideId
                 // }, {relations: ["passenger", "driver"]});
 
-                const ride = await Ride.findOne({
-                    id: args.rideId
-                });
+                const ride = await Ride.findOne(
+                    {
+                        id: args.rideId
+                    }, 
+                    { relations: ["passenger", "driver"] }
+                );
 
                 if(ride) {
                     // id 가 paassenger 혹은 driver 와 동일한지 확인
