@@ -8,7 +8,7 @@ export const sendSMS = (to: string, body: string) => {
     return twilioClient.messages.create({
         body,
         to,
-        from: process.env.Twilio_PHONE 
+        from: process.env.TWILIO_PHONE 
     });
 };
 

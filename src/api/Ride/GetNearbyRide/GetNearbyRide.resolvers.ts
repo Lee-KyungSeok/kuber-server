@@ -19,11 +19,14 @@ const resolvers: Resolvers = {
                 const {lastLat, lastLng} = user;
 
                 try {
-                    const ride = await getRepository(Ride).findOne({
-                        status: "REQUESTING",
-                        pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
-                        pickUpLng: Between(lastLng - 0.05, lastLng + 0.05)
-                    });
+                    const ride = await getRepository(Ride).findOne(
+                        {
+                            status: "REQUESTING",
+                            pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
+                            pickUpLng: Between(lastLng - 0.05, lastLng + 0.05)
+                        }, 
+                        { relations: ["passenger"] }
+                    );
 
                     // ride 가 있는 경우에는 ride 를 리턴하고 없는 경우에는 아무것도 반환 X 하지만 결과는 true
                     if(ride) {
